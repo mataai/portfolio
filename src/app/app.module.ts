@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UtilsModule } from './utils/utils.module'
+import { UtilsModule } from './utils/utils.module';
+import { MainModule } from './main/main.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UtilsModule } from './utils/utils.module'
     AppRoutingModule,
     FormsModule,
     HttpModule,
-    UtilsModule
+    UtilsModule,
+    MainModule
   ],
 
   providers: [],
