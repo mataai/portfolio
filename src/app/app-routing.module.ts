@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: 'utils/*', redirectTo: 'utils', pathMatch: 'full' },
-  { path: '', redirectTo: '/portfolio', pathMatch: 'full' }
+  { path: '', redirectTo: 'portfolio', pathMatch: 'full' }
 ];
 
 @NgModule({
