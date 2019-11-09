@@ -1,12 +1,27 @@
 <utils-nav></utils-nav>
 <div class="container">
-    <form>
+    <h1>
+        Calculateur de dépot de caisse
+    </h1><br>
+    <form class="table">
+        <div class="form-group">
+            <!-- <input [(ngModel)]="cashAmount" name="twohunned" [ngModelOptions]="{standalone: true}"/> -->
+        </div>
+        <div class="form-group">
+            <div class="row thead-light">
+                <h4 class="text-center col-md-3">Quantitée</h4>
+                <h4 class="text-center col-md-1">Type</h4>
+                <h4 class="text-center col-md-1">Valeur</h4>
+                <h4 class="text-center col-md-1">Dépot</h4>
+            </div>
+        </div>
         <form-item [money]="item" *ngFor="let item of content; let i = index"></form-item>
         <div class="form-group">
             <div class="row">
-                <p class="col-md-3"></p>
-                <p class="col-md-1"></p>
-                <p class="col-md-3">{{total().toFixed(2)}}</p>
+                <p class="text-center col-md-3"></p>
+                <p class="text-center col-md-1"></p>
+                <p class="text-center col-md-1">{{total().toFixed(2)}}$</p>
+                <p class="text-center col-md-1">{{this.depositTotal.toFixed(2)}}$</p>
             </div>
         </div>
         <div class="btn btn-primary" (click)="countDeposit()">Submit</div>

@@ -5,12 +5,14 @@ import { UtilsRoute } from "./utils-route/utils-route";
 import { MainComponent } from './main/main.component';
 import { NavComponent } from './nav/nav.component';
 import { FormItemComponent } from './cash-counter/models/form-item/form-item.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    UtilsRoute
+    UtilsRoute,
+    FormsModule
 
   ],
   declarations: [CashCounterComponent, MainComponent, NavComponent, FormItemComponent],

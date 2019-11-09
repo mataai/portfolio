@@ -1,24 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef, ContentChild, SystemJsNgModuleLoader, QueryList } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+let cashAmount: number = 200;
 @Component({
   selector: 'app-cash-counter',
   templateUrl: './cash-counter.component.html',
   styleUrls: ['./cash-counter.component.css']
 })
-
 export class CashCounterComponent implements OnInit {
 
   public content = [];
-  @ViewChild('0') fivecent: ElementRef;
-  @ViewChild('1') tencent: ElementRef;
-  @ViewChild('2') twenyfivecent: ElementRef;
-  @ViewChild('3') onedol: ElementRef;
-  @ViewChild('4') twodol: ElementRef;
-  @ViewChild('5') fivedol: ElementRef;
-  @ViewChild('6') tendol: ElementRef;
-  @ViewChild('7') twentydol: ElementRef;
-  @ViewChild('8') fifthydol: ElementRef;
-  @ViewChild('9') hundreddol: ElementRef;
+  public depositTotal = 0;
 
   constructor() { }
 
@@ -55,49 +46,53 @@ export class CashCounterComponent implements OnInit {
     }
     if (total <= 200) {
       alert("Le montant total est sous 200$ il n'y a donc rien a deposer.")
+      
+      this.depositTotal = 0;
+      for (let j = 0; j < this.content.length; j++) {
+
+        this.content[j].deposit = this.content[j].qty - after[j].qty;
+        this.depositTotal += this.content[j].value * this.content[j].deposit;
+      }
       return;
     }
     else {
       total = this.getArrayTotal(after);
       var difference = total - 200;
-      console.log("diff: " + difference);
       var decimals = difference - Math.trunc(difference);
-      var i = 2;
-      var exit = true;
-      while (exit) {
-        console.log(i);
-        if (after[i].qty >= outdif) {
-          if (i < 3) {
-            var outdif = Math.trunc(decimals / after[i].value);
-            console.log(outdif +": " + after[i].value);
-            after[i].qty -= outdif;
-            difference -= after[i].value * outdif;
-            decimals -= after[i].value * outdif;
-          }
-          else {
-            var outdif = Math.trunc(difference / after[i].value);
-            console.log(outdif +": " + after[i].value);
-            after[i].qty -= outdif;
-            difference -= after[i].value * outdif;
-            if (i = 3){
-              exit = false;
-            }
+      decimals = Math.round(decimals * 100) / 100
+
+      for (let i = 0; i < after.length; i++) {
+        var index = 2 - i < 0 ? 12 - i : 2 - i;
+        if (index < 3) {
+          var outdif = Math.trunc(decimals / after[index].value);
+          if (after[index].qty >= outdif) {
+
+            outdif = Math.trunc(decimals / after[index].value);
+            after[index].qty -= outdif;
+            decimals -= after[index].value * outdif;
           }
         }
-        --i;
-        
-        if (i=-1){
-          i = after.length-1;
+        else {
+          var outdif = Math.trunc(difference / after[index].value);
+          if (after[index].qty >= outdif) {
+            after[index].qty -= outdif;
+            difference -= after[index].value * outdif;
+          }
+
         }
       }
 
+
+
+
+      this.depositTotal = 0;
       for (let j = 0; j < this.content.length; j++) {
 
         this.content[j].deposit = this.content[j].qty - after[j].qty;
-        console.log("fuck me here");
-        console.log(this.content[j].qty - after[j].qty);
+        this.depositTotal += this.content[j].value * this.content[j].deposit;
       }
 
+    {//#region old code 
       // for (let i = 3; i <= 0; i--) {
       //   if (after[i].qty >= outdif) {
       //     if (i < 3) {
@@ -197,11 +192,13 @@ export class CashCounterComponent implements OnInit {
       // else {
       //   after[3].qty = 0;
       // }
-
+    }
 
 
     }
   }
+
+  
 
 }
 
