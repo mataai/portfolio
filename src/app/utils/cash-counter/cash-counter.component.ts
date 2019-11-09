@@ -73,6 +73,7 @@ export class CashCounterComponent implements OnInit {
           }
         }
         else {
+          console.log(outdif + "-" + difference  + "-" + after[index].value + "-"  + Math.trunc(difference / after[index].value))
           var outdif = Math.trunc(difference / after[index].value);
           if (after[index].qty >= outdif) {
             after[index].qty -= outdif;

@@ -12,6 +12,7 @@ import { Money } from '../../cash-counter.component';
         <p class="text-center col-md-1">x {{this.money.value}} </p>
         <p class="text-center col-md-1">{{this.sum}}</p>
         <p class="text-center col-md-1">{{this.money.deposit}}</p>
+        <p class="text-center col-md-1">({{(this.money.deposit*this.money.value).toFixed(2)}}$)</p>
       </div>
     </div>`,
 })
