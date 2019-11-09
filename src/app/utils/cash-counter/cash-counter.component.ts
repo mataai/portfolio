@@ -59,21 +59,19 @@ export class CashCounterComponent implements OnInit {
       total = this.getArrayTotal(after);
       var difference = total - 200;
       var decimals = difference - Math.trunc(difference);
-      decimals = Math.round(decimals * 100) / 100
+      decimals = Math.round(difference - Math.trunc(difference) * 100) / 100;
 
       for (let i = 0; i < after.length; i++) {
         var index = 2 - i < 0 ? 12 - i : 2 - i;
         if (index < 3) {
           var outdif = Math.trunc(decimals / after[index].value);
           if (after[index].qty >= outdif) {
-
             outdif = Math.trunc(decimals / after[index].value);
             after[index].qty -= outdif;
             decimals -= after[index].value * outdif;
           }
         }
         else {
-          console.log(outdif + "-" + difference  + "-" + after[index].value + "-"  + Math.trunc(difference / after[index].value))
           var outdif = Math.trunc(difference / after[index].value);
           if (after[index].qty >= outdif) {
             after[index].qty -= outdif;
