@@ -21,6 +21,7 @@ var cashAmount = 200;
 var CashCounterComponent = (function () {
     function CashCounterComponent() {
         this.content = [];
+        this.leftOver = 200;
         this.depositTotal = 0;
     }
     CashCounterComponent.prototype.ngOnInit = function () {
@@ -51,8 +52,8 @@ var CashCounterComponent = (function () {
         for (var i = 0; i < this.content.length; i++) {
             after[i] = new Money(this.content[i].value, "", this.content[i].qty);
         }
-        if (total <= 200) {
-            alert("Le montant total est sous 200$ il n'y a donc rien a deposer.");
+        if (total <= this.leftOver) {
+            alert("Le montant total est sous " + this.leftOver + "$ il n'y a donc rien a deposer.");
             this.depositTotal = 0;
             for (var j = 0; j < this.content.length; j++) {
                 this.content[j].deposit = this.content[j].qty - after[j].qty;
@@ -62,9 +63,11 @@ var CashCounterComponent = (function () {
         }
         else {
             total = this.getArrayTotal(after);
-            var difference = total - 200;
+            var difference = total - this.leftOver;
             var decimals = difference - Math.trunc(difference);
+            console.log(difference);
             decimals = Math.round((difference - Math.trunc(difference)) * 100) / 100;
+            console.log(decimals);
             for (var i = 0; i < after.length; i++) {
                 var index = 2 - i < 0 ? 12 - i : 2 - i;
                 if (index < 3) {
@@ -77,9 +80,13 @@ var CashCounterComponent = (function () {
                 }
                 else {
                     var outdif = Math.trunc(difference / after[index].value);
-                    if (after[index].qty >= outdif) {
-                        after[index].qty -= outdif;
-                        difference -= after[index].value * outdif;
+                    console.log(after[index].value + ":" + outdif + "-" + difference);
+                    for (var j = outdif; j >= 0; j--) {
+                        if (after[index].qty >= j) {
+                            after[index].qty -= j;
+                            difference -= after[index].value * j;
+                            j = 0;
+                        }
                     }
                 }
             }
@@ -87,6 +94,10 @@ var CashCounterComponent = (function () {
             for (var j = 0; j < this.content.length; j++) {
                 this.content[j].deposit = this.content[j].qty - after[j].qty;
                 this.depositTotal += this.content[j].value * this.content[j].deposit;
+            }
+            for (var i = 0; i < this.content.length; i++) {
+                console.log(after[i]);
+                console.log(this.content[i]);
             }
             {
             }
@@ -112,7 +123,7 @@ var Money = (function () {
     }
     return Money;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/cash-counter.component.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/cash-counter.component.js.map
 
 /***/ }),
 
@@ -147,7 +158,7 @@ var PortfolioComponent = (function () {
     ], PortfolioComponent);
     return PortfolioComponent;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/portfolio.component.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/portfolio.component.js.map
 
 /***/ }),
 
@@ -182,7 +193,7 @@ var MainComponent = (function () {
     ], MainComponent);
     return MainComponent;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/main.component.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/main.component.js.map
 
 /***/ }),
 
@@ -217,7 +228,7 @@ if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["a" /* enableProdMode */])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/main.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/main.js.map
 
 /***/ }),
 
@@ -256,7 +267,7 @@ var AppRoutingModule = (function () {
     ], AppRoutingModule);
     return AppRoutingModule;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/app-routing.module.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/app-routing.module.js.map
 
 /***/ }),
 
@@ -290,7 +301,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/app.component.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/app.component.js.map
 
 /***/ }),
 
@@ -347,7 +358,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/app.module.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/app.module.js.map
 
 /***/ }),
 
@@ -389,7 +400,7 @@ var MainRouteModule = (function () {
     ], MainRouteModule);
     return MainRouteModule;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/main-route.module.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/main-route.module.js.map
 
 /***/ }),
 
@@ -430,7 +441,7 @@ var MainModule = (function () {
     ], MainModule);
     return MainModule;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/main.module.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/main.module.js.map
 
 /***/ }),
 
@@ -500,7 +511,7 @@ var FormItemComponent = (function () {
     return FormItemComponent;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/form-item.component.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/form-item.component.js.map
 
 /***/ }),
 
@@ -535,7 +546,7 @@ var NavComponent = (function () {
     ], NavComponent);
     return NavComponent;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/nav.component.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/nav.component.js.map
 
 /***/ }),
 
@@ -580,7 +591,7 @@ var UtilsRoute = (function () {
     ], UtilsRoute);
     return UtilsRoute;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/utils-route.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/utils-route.js.map
 
 /***/ }),
 
@@ -631,7 +642,7 @@ var UtilsModule = (function () {
     ], UtilsModule);
     return UtilsModule;
 }());
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/utils.module.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/utils.module.js.map
 
 /***/ }),
 
@@ -647,7 +658,7 @@ var UtilsModule = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=C:/Users/1765050/Desktop/portfolio/src/environment.js.map
+//# sourceMappingURL=D:/Projects/portfolio/src/environment.js.map
 
 /***/ }),
 
@@ -703,7 +714,7 @@ module.exports = "<p>\r\n  portfolio comming soon\r\n</p>\r\n"
 /***/ 686:
 /***/ (function(module, exports) {
 
-module.exports = "<utils-nav></utils-nav>\r\n<div class=\"container\">\r\n    <h1>\r\n        Calculateur de dépôt de caisse\r\n    </h1><br>\r\n    <form class=\"table\">\r\n        <div class=\"form-group\">\r\n            <!-- <input [(ngModel)]=\"cashAmount\" name=\"twohunned\" [ngModelOptions]=\"{standalone: true}\"/> -->\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div class=\"row thead-light\">\r\n                <h4 class=\"text-center col-md-3\">Quantitée</h4>\r\n                <h4 class=\"text-center col-md-1\">Type</h4>\r\n                <h4 class=\"text-center col-md-1\">Valeur</h4>\r\n                <h4 class=\"text-center col-md-1\">Dépot</h4>\r\n            </div>\r\n        </div>\r\n        <form-item [money]=\"item\" *ngFor=\"let item of content; let i = index\"></form-item>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <p class=\"text-center col-md-3\"></p>\r\n                <p class=\"text-center col-md-1\"></p>\r\n                <p class=\"text-center col-md-1\">{{total().toFixed(2)}}$</p>\r\n                <p class=\"text-center col-md-1\">{{this.depositTotal.toFixed(2)}}$</p>\r\n            </div>\r\n        </div>\r\n        <div class=\"btn btn-primary\" (click)=\"countDeposit()\">Submit</div>\r\n\r\n\r\n    </form>\r\n</div>"
+module.exports = "<utils-nav></utils-nav>\r\n<div class=\"container\">\r\n    <h1>\r\n        Calculateur de dépôt de caisse\r\n    </h1>\r\n    <br>\r\n    <form>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <h5 class=\"col-md-3 text-center\">Montant a laisser dans la caisse.</h5>\r\n                <input type=\"number\" class=\"text-center col-md-3 form-control\" [(ngModel)]=\"leftOver\" name=\"leftOver\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div class=\"row \">\r\n                <h4 class=\"text-center col-md-3\">Quantitée</h4>\r\n                <h4 class=\"text-center col-md-1\">Type</h4>\r\n                <h4 class=\"text-center col-md-1\">Valeur</h4>\r\n                <h4 class=\"text-center col-md-1\">Dépot</h4>\r\n            </div>\r\n        </div>\r\n        <form-item [money]=\"item\" *ngFor=\"let item of content; let i = index\"></form-item>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <p class=\"text-center col-md-3\"></p>\r\n                <p class=\"text-center col-md-1\"></p>\r\n                <p class=\"text-center col-md-1\">{{total().toFixed(2)}}$</p>\r\n                <p class=\"text-center col-md-1\">{{this.depositTotal.toFixed(2)}}$</p>\r\n                <p class=\"text-center col-md-1\">{{total().toFixed(2) - this.depositTotal.toFixed(2)}}$</p>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"row justify-content-center\">\r\n            <div class=\"btn btn-primary\" (click)=\"countDeposit()\">Submit</div>\r\n        </div>\r\n\r\n\r\n        <p> <br> </p>\r\n    </form>\r\n</div>"
 
 /***/ }),
 
