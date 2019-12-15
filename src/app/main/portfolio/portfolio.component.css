@@ -4,7 +4,7 @@ Hero
 .paralax-sect {
   width: 99vw;
   display: flex;
-  height: 110vh;
+  height: 100vh;
   justify-content: center;
   background: #191919 no-repeat fixed;
   background-size: cover;
@@ -590,54 +590,19 @@ Hero
 }
 
 /*
-Timeline
+Project Section
 */
-
-.timeline-sect {
+.project-sect {
   width: 99vw;
-  height: 500vh;
-  padding-top: 15em;
-  background: whitesmoke;
-  display: grid;
-  grid-template-rows: 15em repeat(auto-fill, 120px);
-  grid-template-columns: auto 5px auto;
+  height: 300vh;
+  background-color: #17323a;
 }
 
-.timeline-line {
-  margin-top: 15em;
-  grid-column: 2;
-  grid-row-start: 1;
-  grid-row-end: span 1000;
-  background-color: royalblue;
-}
 
-.timeline-job {
-  justify-content: center;
-  margin-left: auto;
-  align-self: center;
-  margin-right: auto;
-  color: royalblue;
-  padding: 2em;
-  grid-column: 1;
-  grid-row-end: span 1;
-}
 
-.timeline-other {
-  justify-content: center;
-  align-self: center;
-  margin-left: auto;
-  margin-right: auto;
-  color: royalblue;
-  grid-column: 3;
-  grid-row-end: span 1;
-}
-
-.card{
-}
-
-.timeline-item h1{
-    font-weight: bold;
-}
+/*
+Next Section
+*/
 
 .things-sect {
   width: 99vw;
