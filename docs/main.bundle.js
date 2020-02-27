@@ -707,7 +707,7 @@ module.exports = "<router-outlet></router-outlet>"
 /***/ 685:
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  portfolio comming soon\r\n</p>\r\n"
+module.exports = "<p>\r\n  portfolio coming soon\r\n</p>\r\n"
 
 /***/ }),
 
