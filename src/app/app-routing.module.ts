@@ -4,13 +4,20 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: 'utils/*', redirectTo: 'utils', pathMatch: 'full' },
+  {
+    path: 'utils/',
+    loadChildren: () => import('./utils/utils.module').then(m => m.UtilsModule)
+  },
+  {
+    path: 'portfolio/',
+    loadChildren: () => import('./main/main.module').then(m => m.MainModule)
+  },
   { path: '', redirectTo: 'portfolio', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports:[RouterModule],
+  exports: [RouterModule],
   declarations: []
 })
 export class AppRoutingModule { }
