@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "profolio": {
+    "portfolio": {
       "projectType": "application",
       "schematics": {},
       "root": "",
