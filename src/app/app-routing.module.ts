@@ -5,8 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'utils/',
-    loadChildren: () => import('./utils/utils.module').then(m => m.UtilsModule)
+    path: 'sepaq/',
+    loadChildren: () => import('./sepaq/sepaq.module').then(m => m.SepaqModule)
   },
   {
     path: 'portfolio/',
