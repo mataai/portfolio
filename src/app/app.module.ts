@@ -4,8 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UtilsModule } from './utils/utils.module';
 import { MainModule } from './main/main.module';
+import { SepaqModule } from './sepaq/sepaq.module';
+import {ClipboardModule} from '@angular/cdk/clipboard';  
 
 @NgModule({
   declarations: [
@@ -16,11 +17,12 @@ import { MainModule } from './main/main.module';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    UtilsModule,
-    MainModule
+    MainModule,
+    SepaqModule,
+    ClipboardModule
   ],
 
-  providers: [],
+  providers: [ClipboardModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

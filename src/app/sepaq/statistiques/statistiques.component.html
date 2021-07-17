@@ -1,0 +1,59 @@
+<sepaq-nav></sepaq-nav>
+
+<body>
+  <form class="container">
+    <br>
+    <br>
+    <h1 class="content-center">System de Statistiques</h1>
+    <div class="form-group row">
+      <label class="col-md-3" for="web"> Billets web</label>
+      <input
+        class="col-md-3"
+        id="web"
+        [(ngModel)]="stats.web"
+        [ngModelOptions]="{standalone: true}"
+        type="number"
+        min="0"
+        max="999"
+      />
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3" for="kid"> Enfants </label>
+      <input
+        class="col-md-3"
+        id="kid"
+        [(ngModel)]="stats.enfant"
+        [ngModelOptions]="{standalone: true}"
+        type="number"
+        min="0"
+        max="999"
+      />
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3" for="dog">Chiens</label>
+      <input
+        class="col-md-3"
+        id="dog"
+        [(ngModel)]="stats.chien"
+        [ngModelOptions]="{standalone: true}"
+        type="number"
+        min="0"
+        max="999"
+      />
+    </div>
+    <div class="form-group row">
+      <label class="col-md-3" for="golf">Golf (Boucherville seulement)</label>
+      <input
+        class="col-md-3"
+        id="golf"
+        [(ngModel)]="stats.golf"
+        [ngModelOptions]="{standalone: true}"
+        type="number"
+        min="0"
+        max="999"
+      />
+    </div>
+  </form>
+
+  <button (click)="downloadFile()">Sauvegarder</button>
+</body>
