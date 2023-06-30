@@ -605,20 +605,12 @@ Projects Section
   text-align: center;
 }
 
-.timeline-item-1 {
+.timeline-item {
   width: 40em;
-  margin: 2em 10em;
-  float: left;
+  max-width: 90vw;
+  margin: 2em auto;
 }
 
-.timeline-item-0 {
-  width: 40em;
-  float: right;
-  margin: 2em 10em;
-}
-
-.section-subTitle {
-}
 /*
 Next Section
 */
