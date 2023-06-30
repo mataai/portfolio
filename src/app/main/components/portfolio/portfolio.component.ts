@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Repo } from './models';
+import { Repo } from '../../models';
 
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
 })
-export class OldPortfolioComponent implements OnInit {
+export class PortfolioComponent implements OnInit {
   public selectedTab = '';
 
   public repos$!: Observable<Repo[]>;
@@ -17,7 +17,6 @@ export class OldPortfolioComponent implements OnInit {
   constructor(private readonly _httpClient: HttpClient) { }
 
   ngOnInit() {
-
     this.repos$ = this._httpClient.get<Repo[]>('https://api.github.com/users/handsomeromanian/repos');
     this.repos$.pipe(tap(x => console.log(x)))
   }

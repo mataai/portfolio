@@ -10,9 +10,7 @@ import { MainModule } from './main/main.module';
 import { SepaqModule } from './sepaq/sepaq.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,10 +18,10 @@ import { SepaqModule } from './sepaq/sepaq.module';
     FormsModule,
     MainModule,
     SepaqModule,
-    ClipboardModule
+    ClipboardModule,
   ],
 
   providers: [ClipboardModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

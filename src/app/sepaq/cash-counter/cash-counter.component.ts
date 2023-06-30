@@ -4,19 +4,18 @@ let cashAmount: number = 200;
 @Component({
   selector: 'app-cash-counter',
   templateUrl: './cash-counter.component.html',
-  styleUrls: ['./cash-counter.component.css']
+  styleUrls: ['./cash-counter.component.css'],
 })
 export class CashCounterComponent implements OnInit {
-
-  public content = [];
+  public content: Money[] = [];
   public leftOver: number = 200;
   public depositTotal = 0;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.content[0] = new Money(0.05, '5c', 0);
-    this.content[1] = new Money(0.10, '10c', 0);
+    this.content[1] = new Money(0.1, '10c', 0);
     this.content[2] = new Money(0.25, '25c', 0);
     this.content[3] = new Money(1, '1$', 0);
     this.content[4] = new Money(2, '2$', 0);
@@ -31,7 +30,7 @@ export class CashCounterComponent implements OnInit {
     return this.getArrayTotal(this.content);
   }
 
-  public getArrayTotal(array): number {
+  public getArrayTotal(array: Money[]): number {
     var total: number = 0;
     for (let i = 0; i < array.length; i++) {
       total += array[i].qty * array[i].value;
@@ -40,29 +39,29 @@ export class CashCounterComponent implements OnInit {
   }
 
   countDeposit() {
-
     var total = this.total();
-    var after = [null, null, null, null, null, null, null, null, null, null];
+    var after: Money[] = [];
 
     for (let i = 0; i < this.content.length; i++) {
-
-      after[i] = new Money(this.content[i].value, "", this.content[i].qty);
-
+      after[i] = new Money(this.content[i].value, '', this.content[i].qty);
     }
-    if (total <= this.leftOver) { //Pas assez pour depot
+    if (total <= this.leftOver) {
+      //Pas assez pour depot
 
-      alert("Le montant total est sous "+ this.leftOver +"$ il n'y a donc rien a deposer.")
+      alert(
+        'Le montant total est sous ' +
+          this.leftOver +
+          "$ il n'y a donc rien a deposer."
+      );
 
       this.depositTotal = 0;
       for (let j = 0; j < this.content.length; j++) {
-
         this.content[j].deposit = this.content[j].qty - after[j].qty;
         this.depositTotal += this.content[j].value * this.content[j].deposit;
-
       }
       return;
-    }
-    else { //Depot
+    } else {
+      //Depot
 
       total = this.getArrayTotal(after);
       var difference = total - this.leftOver;
@@ -72,29 +71,27 @@ export class CashCounterComponent implements OnInit {
       decimals = Math.round((difference - Math.trunc(difference)) * 100) / 100;
       console.log(decimals);
       for (let i = 0; i < after.length; i++) {
-
         var index = 2 - i < 0 ? 12 - i : 2 - i;
 
-        if (index < 3) {// coins
+        if (index < 3) {
+          // coins
           var outdif = Math.trunc(decimals / after[index].value);
           if (after[index].qty >= outdif) {
-
             outdif = Math.trunc(decimals / after[index].value);
             after[index].qty -= outdif;
             decimals -= after[index].value * outdif;
-
           }
-        }
-        else {   //bills
+        } else {
+          //bills
 
           var outdif = Math.trunc(difference / after[index].value);
-          console.log(after[index].value + ":" + outdif + "-" + difference)
+          console.log(after[index].value + ':' + outdif + '-' + difference);
           for (let j = outdif; j >= 0; j--) {
             if (after[index].qty >= j) {
               after[index].qty -= j;
               difference -= after[index].value * j;
               j = 0;
-            }         
+            }
           }
 
           // if (after[index].qty >= outdif) {
@@ -109,7 +106,6 @@ export class CashCounterComponent implements OnInit {
           //   after[index].qty -= outdif-1;
           //   difference -= after[index].value * outdif-2;
           // }
-
         }
       }
 
@@ -119,23 +115,21 @@ export class CashCounterComponent implements OnInit {
         this.depositTotal += this.content[j].value * this.content[j].deposit;
       }
       for (let i = 0; i < this.content.length; i++) {
-        console.log(after[i])
+        console.log(after[i]);
         console.log(this.content[i]);
-        
       }
 
-      {//#region old code 
+      {
+        //#region old code
         // for (let i = 3; i <= 0; i--) {
         //   if (after[i].qty >= outdif) {
         //     if (i < 3) {
         //       var outdif = Math.trunc(decimals / after[i].value);
-
         //       after[i].qty -= outdif;
         //       difference -= after[i].value * outdif;
         //       decimals -= after[i].value * outdif;
         //     }
         //     else {
-
         //       after[i].qty -= outdif;
         //       difference -= after[i].value * outdif;
         //     }
@@ -148,8 +142,6 @@ export class CashCounterComponent implements OnInit {
         //     difference -= after[i].value * outdif;
         //   }
         // }
-
-
         // if (decimals != 0) {
         //   var outqty = Math.trunc(decimals / 0.25);
         //   if (after[2].qty > 2 && after[2].qty > outqty) {
@@ -157,31 +149,25 @@ export class CashCounterComponent implements OnInit {
         //     difference -= 0.25 * outqty;
         //     decimals -= 0.25 * outqty;
         //   }
-
         //   outqty = Math.trunc(decimals / 0.10);
-
         //   if (after[1].qty > 2 && outqty) {
         //     after[1].qty -= Math.trunc(decimals / 0.10);
         //     difference -= 0.10 * Math.trunc(decimals / 0.10);
         //     decimals -= 0.10 * Math.trunc(decimals / 0.10);
         //   }
-
         //   outqty = Math.trunc(decimals / 0.05);
-
         //   if (after[0].qty > 2 && after[0].qty > outqty) {
         //     after[0].qty -= Math.trunc(decimals / 0.05);
         //     difference -= 0.05 * Math.trunc(decimals / 0.05);
         //     decimals -= 0.05 * Math.trunc(decimals / 0.05);
         //   }
         // }
-
         // console.log(after[9].qty + ":" + difference + ":" + Math.trunc(difference / 100))
         // if (after[9].qty > Math.trunc(difference / 100)) {
         //   after[9].qty -= Math.trunc(difference / 100);
         //   difference -= 100 * Math.trunc(difference / 100);
         // }
         // else { after[9].qty = 0; }
-
         // if (after[8].qty > Math.trunc(difference / 50)) {
         //   after[8].qty -= Math.trunc(difference / 50);
         //   difference -= 50 * Math.trunc(difference / 50);
@@ -225,25 +211,19 @@ export class CashCounterComponent implements OnInit {
         //   after[3].qty = 0;
         // }
       }
-
     }
   }
-
-
-
 }
 
 export class Money {
-
   public value;
   public desc;
   public qty = 0;
   public deposit = 0;
 
-  constructor(value, desc, qty) {
+  constructor(value: number, desc: string, qty: number) {
     this.value = value;
     this.desc = desc;
     this.qty = qty;
   }
-
 }

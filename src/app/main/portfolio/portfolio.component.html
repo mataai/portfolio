@@ -1,12 +1,9 @@
 <section id="paralax-sect">
-  <div id="stars"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
   <div class="container">
     <div class="display-3 paralax-text">
       Hey I'm Matei Martin,<br />
       <p>
-        a Computer Science &lt;<span style="color: royalblue;">Student</span>&gt;
+        a Computer Science &lt;<span style="color: royalblue">Student</span>&gt;
       </p>
     </div>
   </div>
@@ -16,18 +13,22 @@
   <p class="section-header">Timeline</p>
   <div class="section-subTitle"></div>
   <div class="timeline-list">
-    <div class="card timeline-item" *ngFor="let item of this.repos$ | async" (click)="goToUrl(item.html_url)">
-      <img class="card-img-top" src="https://picsum.photos/10/4" alt="Card image cap" />
+    <div
+      class="card timeline-item"
+      *ngFor="let item of repos$ | async"
+      (click)="goToUrl(item.html_url)"
+    >
+      <img
+        class="card-img-top"
+        src="https://picsum.photos/10/4"
+        alt="Card image cap"
+      />
       <div class="card-body">
-        <h5 class="card-title">{{item.name}}</h5>
+        <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">
-          {{item.description}}
+          {{ item.description }}
         </p>
       </div>
     </div>
   </div>
 </section>
-
-<!--<section class="things-sect">
-
-</section> -->

@@ -1,28 +1,32 @@
-import {
-  Component, Input,
-  OnInit
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Event } from '@angular/router';
 import { Money } from '../../cash-counter.component';
 
 @Component({
   selector: 'form-item',
   template: `<div class="form-group">
-      <div class="row">
-        <input type="number" class="col-md-3 form-control" (change)="update($event)" placeholder="Quantité de {{this.money.desc}}">
-        <p class="text-center col-md-1">x {{this.money.value}} </p>
-        <p class="text-center col-md-1">{{this.sum}}</p>
-        <p class="text-center col-md-1">{{this.money.deposit}}</p>
-        <p class="text-center col-md-1">({{(this.money.deposit*this.money.value).toFixed(2)}}$)</p>
-      </div>
-    </div>`,
+    <div class="row">
+      <input
+        type="number"
+        class="col-md-3 form-control"
+        (change)="update($event)"
+        placeholder="Quantité de {{ this.money.desc }}"
+      />
+      <p class="text-center col-md-1">x {{ this.money.value }}</p>
+      <p class="text-center col-md-1">{{ this.sum }}</p>
+      <p class="text-center col-md-1">{{ this.money.deposit }}</p>
+      <p class="text-center col-md-1">
+        ({{ (this.money.deposit * this.money.value).toFixed(2) }}$)
+      </p>
+    </div>
+  </div>`,
 })
 export class FormItemComponent implements OnInit {
-  @Input() money: Money;
+  @Input() money!: Money;
 
+  constructor() {}
 
-  constructor() { }
-
-  update(event) {
+  update(event: any): void {
     this.setQuantity = event.target.value;
   }
 
@@ -30,20 +34,17 @@ export class FormItemComponent implements OnInit {
     return this.money.qty;
   }
 
-  set setQuantity(value) {
+  set setQuantity(value: number) {
     this.money.qty = value;
   }
 
   get sum() {
     if (this.money.value < 1) {
       return (this.money.value * this.quantity).toFixed(2);
-    }
-    else {
+    } else {
       return (this.money.value * this.quantity).toFixed(0);
     }
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
